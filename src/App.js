@@ -1,9 +1,12 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, memo, useCallback } from "react";
 import styled from "styled-components";
 import AnimeCard from "./components/AnimeCard";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [animes, setAnimes] = useState([]);
+  const [value, setValue] = useState("");
+  const MemoizedSearchBar = memo(SearchBar);
 
   const Main = styled.div`
     text-align: center;
@@ -16,13 +19,6 @@ function App() {
     font-size: 3rem;
     line-height: 1;
     margin-bottom: 3.5rem;
-  `;
-
-  const SearchBar = styled.input`
-    border: 2px solid lightgray;
-    padding: 0.75rem;
-    border-radius: 0.375rem;
-    width: 33.3333333%;
   `;
 
   const ContentWrapper = styled.div`
@@ -53,7 +49,17 @@ function App() {
           <h1>Browse your animes</h1>
         </TitleWrapper>
         <div>
-          <SearchBar placeholder="type your animes" type="text" />
+          <SearchBar
+            onChange={(e) => {
+              setValue(e.target.value);
+              fetch(
+                `https://kitsu.io/api/edge/anime?filter[text]=${e.target.value}`
+              )
+                .then((res) => res.json())
+                .then((res) => setAnimes(res.data));
+            }}
+            value={value}
+          />
         </div>
       </Main>
 
