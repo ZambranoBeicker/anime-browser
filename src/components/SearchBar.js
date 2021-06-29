@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fragment, useCallback, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 
 const Input = styled.input`
   border: 2px solid lightgray;
@@ -19,7 +19,6 @@ export default function SearchBar({ onChange, value }) {
         type="text"
         onChange={onChange}
         value={value}
-        autoFocus
       />
     </Fragment>
   );

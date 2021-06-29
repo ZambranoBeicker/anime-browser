@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-export default function AnimeCard({ title, src }) {
-  const MainWrapper = styled.div`
-    width: 25%;
-    margin-top: 1.25rem;
-  `;
+const MainWrapper = styled.div`
+  width: 25%;
+  margin-top: 1.25rem;
+`;
 
-  const TitleWrapper = styled.div`
+const TitleWrapper = styled.div`
 
     text-align:center;
     font-weight: bold;
@@ -14,6 +13,8 @@ export default function AnimeCard({ title, src }) {
     line-height: 2rem;
 
   `;
+
+export default function AnimeCard({ title, src }) {
   return (
     <MainWrapper>
       <div className="px-5">
